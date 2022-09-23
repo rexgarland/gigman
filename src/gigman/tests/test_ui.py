@@ -56,7 +56,7 @@ class DummyUIFactory:
 ui_factory = DummyUIFactory()
 
 
-def test_should_update_local_gitignore():
+def test_should_add_template_to_gitignore_after_ui_selection():
     with TemporaryDirectory() as tmpdir:
         before = ""
         local_manager = DirectoryManager(tmpdir)
@@ -69,13 +69,13 @@ def test_should_update_local_gitignore():
         assert before != after, "UI did not change gitignore"
 
 
-def test_should_not_select_when_query_empty():
+def test_selections_empty_when_selecting_with_no_query():
     ui = ui_factory.create_ui()
     ui.handle(KeyPress("\t"))
     assert ui.selections == []
 
 
-def test_should_replace_options_on_clear_filter():
+def test_all_options_displayed_after_clearing_query():
     ui = ui_factory.create_ui()
     ui.handle(KeyPress("P"))
     ui.handle(KeyPress("\x7f"))
